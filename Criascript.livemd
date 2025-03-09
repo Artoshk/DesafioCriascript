@@ -1,0 +1,229 @@
+# Desafios Criascript
+
+## Section
+
+### [Recebe um range e retorna todos os pares](https://www.youtube.com/shorts/i4g837mRsHA)
+
+```elixir
+valor1 = 1
+valor2 = 10
+
+valor1..valor2
+|> Enum.filter(fn x -> rem(x, 2) == 0 end)
+```
+
+### [Alocar posições em um cinema](https://www.youtube.com/shorts/AxOpj_cf0-Q)
+
+```elixir
+cinema = %{
+  1 => true,
+  2 => false,
+  3 => false,
+  4 => true,
+  5 => true,
+  6 => true,
+  7 => false,
+  8 => false,
+  9 => false,
+  10 => false
+}
+
+reservas = [1, 3, 4, 8, 9, 5000]
+
+Enum.reduce(reservas, cinema, fn pos, accumulator ->
+  case Map.get(cinema, pos) do
+    nil ->
+      IO.puts("Posição #{pos} não existe")
+      accumulator
+
+    true ->
+      IO.puts("Posição #{pos} já reservada")
+      accumulator
+
+    false ->
+      Map.put(accumulator, pos, true)
+  end
+end)
+```
+
+### [Cria se bugou](https://www.youtube.com/shorts/ikBNBV3GQDU)
+
+A descrição é um filtro em uma lista
+
+A real é remover uma substring de uma string
+
+```elixir
+lista = ["macaco", "pato", "peixe", "boi"]
+palavra = "pato"
+
+lista
+|> Enum.map(fn x -> x == palavra end)
+```
+
+```elixir
+frase = "O cria beijou a sua mãe"
+remover = "a sua mãe"
+
+frase
+|> String.replace(remover, "")
+```
+
+### [Converter um número inteiro para uma lista ordenada](https://www.youtube.com/shorts/dord3LQ2aLc)
+
+```elixir
+numero = 84323
+
+numero
+|> Integer.digits()
+|> Enum.sort()
+```
+
+### [Converter HH:MM:SS para segundos](https://www.youtube.com/shorts/osAORzvjWvs)
+
+```elixir
+horario = "1:01:01"
+
+[horas, minutos, segundos] =
+  horario
+  |> String.split(":")
+  |> Enum.map(&String.to_integer/1)
+
+horas * 3600 + minutos * 60 + segundos
+```
+
+### [Criptografar uma string dada a posição no alfabeto](https://www.youtube.com/shorts/WCRZ1zN_mjQ)
+
+```elixir
+palavra = "mamaco"
+
+palavra
+|> String.graphemes()
+|> Enum.map(fn x -> :binary.first(x) - 96 end)
+|> Enum.join()
+```
+
+### [Média das notas dos alunos](https://www.youtube.com/shorts/0bX4oDGbJxE)
+
+```elixir
+estudantes = %{
+  "ademar" => [3, 10, 4, 6],
+  "josias" => [1, 2, 3, 5],
+  "josemildo" => [10, 9, 10, 8],
+  "josefina" => [7, 6, 8, 7]
+}
+
+media_da_escola = 7
+
+estudantes
+|> Enum.map(fn {nome, notas} ->
+  media = Enum.sum(notas) / length(notas)
+  {nome, media >= media_da_escola}
+end)
+```
+
+### [Filtrar um produto dado val min e max](https://www.youtube.com/shorts/oBEZiQaRZao)
+
+Mestrado 🤓
+
+```elixir
+max = 50
+min = 25
+prods = %{"abacate" => 1, "paçoca" => 29.90, "Redbull engradado" => 30.0, "ps5" => 5000}
+
+prods
+|> Enum.filter(fn {_, valor} ->
+  valor >= min && valor <= max
+end)
+```
+
+### [Printar triângulo quadrado](https://www.youtube.com/shorts/doKyvCGztvA)
+
+```elixir
+base = 5
+
+1..base
+|> Enum.each(fn linha ->
+  String.duplicate("*", linha) |> IO.puts()
+end)
+```
+
+### [Número para range de acordo com o alfabeto, 1..4 -> ["a", "b", "c", "d"]](https://www.youtube.com/shorts/IGl-axkYCr8)
+
+```elixir
+num = 4
+
+1..num
+|> Enum.map(fn x -> x + 96 end)
+|> List.to_string()
+|> String.graphemes()
+```
+
+### [Soma de matrizes](https://www.youtube.com/shorts/6hapSDg8Wns)
+
+```elixir
+t1 = [
+  [6.0, 3.0, 4.0, 8.0],
+  [3.0, 6.0, 5.0, 1.0],
+  [4.0, 5.0, 10.0, 7.0],
+  [8.0, 1.0, 7.0, 25.0]
+]
+
+t2 = [
+  [6.0, 3.0, 4.0, 8.0],
+  [3.0, 6.0, 5.0, 1.0],
+  [4.0, 5.0, 10.0, 7.0],
+  [8.0, 1.0, 7.0, 25.0]
+]
+
+t1
+|> Enum.zip(t2)
+|> Enum.map(fn {row1, row2} ->
+  Enum.zip(row1, row2)
+  |> Enum.map(fn {a, b} -> a + b end)
+end)
+|> IO.inspect()
+```
+
+### [Equação de segundo grau](https://youtu.be/iFvnOEPNPSk?si=wFjhRCFCsMDdUnGl)
+
+![exemplo](https://s1.static.brasilescola.uol.com.br/be/2020/03/equacao-exemplo-solucao-incompleta1.jpg)
+
+```elixir
+defmodule EquacaoSegundoGrau do
+  def calcular_raizes(0, 0, 0), do: IO.puts("Parabéns! 0 = 0!")
+  def calcular_raizes(0, 0, _), do: IO.puts("Você cometeu uma contradição")
+  def calcular_raizes(0, b, c) do
+    x = -c / b
+    IO.puts("A equação é de primeiro grau e a raiz é: #{x}")
+  end
+  
+  # Caso: a ≠ 0 (equação de segundo grau)
+  def calcular_raizes(a, b, c) do
+    delta = b * b - 4 * a * c
+    
+    cond do
+      delta < 0 ->
+        IO.puts("Não existe solução real :(")
+        
+      abs(delta) < 1.0e-10 ->
+        x = -b / (2 * a)
+        IO.puts("Existe uma raiz #{x} de multiplicidade 2")
+        
+      true ->
+        x1 = (-b + :math.sqrt(delta)) / (2 * a)
+        x2 = (-b - :math.sqrt(delta)) / (2 * a)
+        IO.puts("As raízes são #{x1} e #{x2}")
+    end
+  end
+end
+
+EquacaoSegundoGrau.calcular_raizes(3,0,-27)
+```
+
+### [Calcular ano bisexto](https://www.youtube.com/shorts/wvMBsf-b0tE)
+
+```elixir
+ano = 2024
+
+(rem(ano, 4) == 0 && rem(ano, 100) != 100) || rem(ano, 400) == 0
+```
