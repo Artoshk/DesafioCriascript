@@ -12,6 +12,12 @@ valor1..valor2
 |> Enum.filter(fn x -> rem(x, 2) == 0 end)
 ```
 
+<!-- livebook:{"output":true} -->
+
+```
+[2, 4, 6, 8, 10]
+```
+
 ### [Alocar posições em um cinema](https://www.youtube.com/shorts/AxOpj_cf0-Q)
 
 ```elixir
@@ -46,6 +52,31 @@ Enum.reduce(reservas, cinema, fn pos, accumulator ->
 end)
 ```
 
+<!-- livebook:{"output":true} -->
+
+```
+Posição 1 já reservada
+Posição 4 já reservada
+Posição 5000 não existe
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+%{
+  1 => true,
+  2 => false,
+  3 => true,
+  4 => true,
+  5 => true,
+  6 => true,
+  7 => false,
+  8 => true,
+  9 => true,
+  10 => false
+}
+```
+
 ### [Cria se bugou](https://www.youtube.com/shorts/ikBNBV3GQDU)
 
 A descrição é um filtro em uma lista
@@ -60,12 +91,24 @@ lista
 |> Enum.map(fn x -> x == palavra end)
 ```
 
+<!-- livebook:{"output":true} -->
+
+```
+[false, true, false, false]
+```
+
 ```elixir
 frase = "O cria beijou a sua mãe"
 remover = "a sua mãe"
 
 frase
 |> String.replace(remover, "")
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+"O cria beijou "
 ```
 
 ### [Converter um número inteiro para uma lista ordenada](https://www.youtube.com/shorts/dord3LQ2aLc)
@@ -76,6 +119,12 @@ numero = 84323
 numero
 |> Integer.digits()
 |> Enum.sort()
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+[2, 3, 3, 4, 8]
 ```
 
 ### [Converter HH:MM:SS para segundos](https://www.youtube.com/shorts/osAORzvjWvs)
@@ -91,6 +140,12 @@ horario = "1:01:01"
 horas * 3600 + minutos * 60 + segundos
 ```
 
+<!-- livebook:{"output":true} -->
+
+```
+3661
+```
+
 ### [Criptografar uma string dada a posição no alfabeto](https://www.youtube.com/shorts/WCRZ1zN_mjQ)
 
 ```elixir
@@ -100,6 +155,12 @@ palavra
 |> String.graphemes()
 |> Enum.map(fn x -> :binary.first(x) - 96 end)
 |> Enum.join()
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+"131131315"
 ```
 
 ### [Média das notas dos alunos](https://www.youtube.com/shorts/0bX4oDGbJxE)
@@ -121,6 +182,12 @@ estudantes
 end)
 ```
 
+<!-- livebook:{"output":true} -->
+
+```
+[{"ademar", false}, {"josefina", true}, {"josemildo", true}, {"josias", false}]
+```
+
 ### [Filtrar um produto dado val min e max](https://www.youtube.com/shorts/oBEZiQaRZao)
 
 Mestrado 🤓
@@ -136,6 +203,12 @@ prods
 end)
 ```
 
+<!-- livebook:{"output":true} -->
+
+```
+[{"Redbull engradado", 30.0}, {"paçoca", 29.9}]
+```
+
 ### [Printar triângulo quadrado](https://www.youtube.com/shorts/doKyvCGztvA)
 
 ```elixir
@@ -147,6 +220,22 @@ base = 5
 end)
 ```
 
+<!-- livebook:{"output":true} -->
+
+```
+*
+**
+***
+****
+*****
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+:ok
+```
+
 ### [Número para range de acordo com o alfabeto, 1..4 -> ["a", "b", "c", "d"]](https://www.youtube.com/shorts/IGl-axkYCr8)
 
 ```elixir
@@ -156,6 +245,12 @@ num = 4
 |> Enum.map(fn x -> x + 96 end)
 |> List.to_string()
 |> String.graphemes()
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+["a", "b", "c", "d"]
 ```
 
 ### [Soma de matrizes](https://www.youtube.com/shorts/6hapSDg8Wns)
@@ -182,6 +277,23 @@ t1
   |> Enum.map(fn {a, b} -> a + b end)
 end)
 |> IO.inspect()
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+[
+  [12.0, 6.0, 8.0, 16.0],
+  [6.0, 12.0, 10.0, 2.0],
+  [8.0, 10.0, 20.0, 14.0],
+  [16.0, 2.0, 14.0, 50.0]
+]
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+[[12.0, 6.0, 8.0, 16.0], [6.0, 12.0, 10.0, 2.0], [8.0, 10.0, 20.0, 14.0], [16.0, 2.0, 14.0, 50.0]]
 ```
 
 ### [Equação de segundo grau](https://youtu.be/iFvnOEPNPSk?si=wFjhRCFCsMDdUnGl)
@@ -220,10 +332,28 @@ end
 EquacaoSegundoGrau.calcular_raizes(3,0,-27)
 ```
 
+<!-- livebook:{"output":true} -->
+
+```
+As raízes são 3.0 e -3.0
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+:ok
+```
+
 ### [Calcular ano bisexto](https://www.youtube.com/shorts/wvMBsf-b0tE)
 
 ```elixir
 ano = 2024
 
 (rem(ano, 4) == 0 && rem(ano, 100) != 100) || rem(ano, 400) == 0
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+true
 ```
